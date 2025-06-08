@@ -48,7 +48,7 @@ public class LojaController {
         List<Produto> produtos = produtoRepository.findByCategoria(categoria);
         List<Depoimento> depoimentos = depoimentoRepository.findByCategoria(categoria);
         List<Categoria> todasAsCategorias = categoriaRepository.findAll();
-        List<TipoPersonalizacao> tiposPersonalizacao = tipoPersonalizacaoRepository.findAll();
+        List<TipoPersonalizacao> tiposPersonalizacao = tipoPersonalizacaoRepository.findByCategoria(categoria);
 
         // 3. Adiciona os dados encontrados ao "Model".
         // O Model vai carregar esses dados para o nosso arquivo HTML.

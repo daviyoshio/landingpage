@@ -4,28 +4,40 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity // Avisa ao Spring que esta classe é uma tabela no banco de dados
+@Entity
 public class Categoria {
 
-    @Id // Marca este campo como a chave primária da tabela
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Define que o ID será gerado automaticamente
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nomeSingular; // Ex: "Necessaire"
-    private String nomePlural;   // Ex: "Necessaires"
-    private String slug;         // Ex: "necessaires" (para usar na URL)
+    private String nomeSingular;
+    private String nomePlural;
+    private String slug;
 
-    @Column(length = 500) // Define um tamanho maior para a coluna de descrição
+    @Column(length = 500)
     private String descricao;
 
     private String imagemDestaqueUrl;
-    private String urlImagemPersonalizacao; // <-- ADICIONE ESTA LINHA
+    private String urlImagemPersonalizacao;
 
-    // Define o relacionamento: Uma Categoria pode ter muitos Produtos
+    private String ctaTitle;
+    @Column(length = 500)
+    private String ctaDescription;
+    @Column(length = 500)
+    private String ctaAttention;
+    // NOVO ATRIBUTO PARA O TEXTO DO BOTÃO CTA
+    private String ctaButtonText;
+    
+    // NOVOS ATRIBUTOS PARA A SEÇÃO HERO
+    @Column(length = 500) // Título principal da Hero Section
+    private String heroTitle;
+    private String heroButtonText; // Texto do botão da Hero Section
+
+
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Produto> produtos = new ArrayList<>();
 
-    // Getters e Setters (essenciais para o Spring funcionar)
     public Long getId() {
         return id;
     }
@@ -74,15 +86,6 @@ public class Categoria {
         this.imagemDestaqueUrl = imagemDestaqueUrl;
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
-    }
-    // ... outros getters e setters ...
-
     public String getUrlImagemPersonalizacao() {
         return urlImagemPersonalizacao;
     }
@@ -90,4 +93,64 @@ public class Categoria {
     public void setUrlImagemPersonalizacao(String urlImagemPersonalizacao) {
         this.urlImagemPersonalizacao = urlImagemPersonalizacao;
     }
+
+    public String getCtaTitle() {
+        return ctaTitle;
+    }
+
+    public void setCtaTitle(String ctaTitle) {
+        this.ctaTitle = ctaTitle;
+    }
+
+    public String getCtaDescription() {
+        return ctaDescription;
+    }
+
+    public void setCtaDescription(String ctaDescription) {
+        this.ctaDescription = ctaDescription;
+    }
+
+    public String getCtaAttention() {
+        return ctaAttention;
+    }
+
+    public void setCtaAttention(String ctaAttention) {
+        this.ctaAttention = ctaAttention;
+    }
+
+    public String getCtaButtonText() {
+        return ctaButtonText;
+    }
+
+    public void setCtaButtonText(String ctaButtonText) {
+        this.ctaButtonText = ctaButtonText;
+    }
+
+    public String getHeroTitle() {
+        return heroTitle;
+    }
+
+    public void setHeroTitle(String heroTitle) {
+        this.heroTitle = heroTitle;
+    }
+
+    public String getHeroButtonText() {
+        return heroButtonText;
+    }
+
+    public void setHeroButtonText(String heroButtonText) {
+        this.heroButtonText = heroButtonText;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
+    
+    
+    
 }
